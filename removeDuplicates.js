@@ -15,7 +15,7 @@ function removeDuplicates(array) {
 		// if current item equals previous item, remove it from the array
 		if (cur === prev) {
 			newArray = newArray.slice(0, i).concat(newArray.slice(i + 1));
-			// else make current number the previous and skip to the next item in the array
+			// else make current item the previous and skip to the next item in the array
 		} else {
 			prev = cur;
 			i += 1;
