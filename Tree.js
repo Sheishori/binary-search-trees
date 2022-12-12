@@ -1,5 +1,5 @@
 import Node from './Node.js';
-import mergeSort from './mergeSort.js';
+import removeDuplicates from './removeDuplicates.js';
 
 const Tree = (array) => {
 	const buildTree = (array, start = 0, end = array.length - 1) => {
@@ -12,7 +12,7 @@ const Tree = (array) => {
 		return Node(array[middle], left, right);
 	};
 
-	let root = buildTree(mergeSort(array));
+	let root = buildTree(removeDuplicates(array));
 
 	return { root };
 };
