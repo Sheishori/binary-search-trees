@@ -63,7 +63,18 @@ const Tree = (array) => {
 		else return smallestChild(root.left);
 	};
 
-	return { root, insert, deleteNode };
+	const find = (value) => {
+		return findRec(value, root);
+	};
+
+	const findRec = (value, root) => {
+		if (root === null) return 'Node with a given value was not found';
+		if (value === root.value) return root;
+		if (value < root.value) return findRec(value, root.left);
+		else return findRec(value, root.right);
+	};
+
+	return { root, insert, deleteNode, find };
 };
 
 export default Tree;

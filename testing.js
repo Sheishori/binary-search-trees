@@ -13,5 +13,4 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 };
 
 prettyPrint(newTree.root);
-newTree.deleteNode(8);
-prettyPrint(newTree.root);
+console.log(newTree.find(9));
