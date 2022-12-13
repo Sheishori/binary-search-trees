@@ -74,18 +74,8 @@ const Tree = (array) => {
 		else return findRec(value, root.right);
 	};
 
-	const levelOrder = (func) => {
-		if (root === null) return;
-		let queue = [root];
-		let nodes = [];
-		// queue all children using breadth-first traversal
-		while (queue[0]) {
-			// add all nodes to an array
-			nodes.push(queue[0]);
-			if (queue[0].left !== null) queue.push(queue[0].left);
-			if (queue[0].right !== null) queue.push(queue[0].right);
-			queue.shift();
-		}
+	// execute the function provided to the tree traversal methods
+	const processFunc = (nodes, func) => {
 		// if function exists, provide each node to the function
 		if (func) {
 			nodes.forEach((node) => {
@@ -101,20 +91,24 @@ const Tree = (array) => {
 		}
 	};
 
+	const levelOrder = (func) => {
+		if (root === null) return;
+		let queue = [root];
+		let nodes = [];
+		// queue all children using breadth-first traversal
+		while (queue[0]) {
+			// add all nodes to an array
+			nodes.push(queue[0]);
+			if (queue[0].left !== null) queue.push(queue[0].left);
+			if (queue[0].right !== null) queue.push(queue[0].right);
+			queue.shift();
+		}
+		return processFunc(nodes, func);
+	};
+
 	const inorder = (func) => {
 		let nodes = inorderRec(root);
-		if (func) {
-			nodes.forEach((node) => {
-				func(node);
-			});
-			// else return an array of values
-		} else {
-			let values = [];
-			nodes.forEach((node) => {
-				values.push(node.value);
-			});
-			return values;
-		}
+		return processFunc(nodes, func);
 	};
 
 	const inorderRec = (root, nodes = []) => {
