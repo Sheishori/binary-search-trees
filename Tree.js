@@ -23,13 +23,14 @@ const Tree = (array) => {
 		if (root === null) {
 			root = Node(value);
 			return root;
-			// if value is smaller than the root, travel into the left side
-		} else if (value < root.value) root.left = insertLeaf(value, root.left);
+			// don't do anything if the value already exists in the tree
+		} else if (value === root.value) return root;
+		// if value is smaller than the root, travel into the left side
+		else if (value < root.value) root.left = insertLeaf(value, root.left);
 		// if bigger, travel into the right side
 		else root.right = insertLeaf(value, root.right);
 		return root;
 	};
-
 	return { root, insert };
 };
 
