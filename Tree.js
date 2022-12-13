@@ -166,6 +166,16 @@ const Tree = (array) => {
 		return diff <= 1 && diff >= -1;
 	};
 
+	const prettyPrint = (node = root, prefix = '', isLeft = true) => {
+		if (node.right !== null) {
+			prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
+		}
+		console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.value}`);
+		if (node.left !== null) {
+			prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
+		}
+	};
+
 	return {
 		root,
 		insert,
@@ -175,6 +185,7 @@ const Tree = (array) => {
 		preorder,
 		inorder,
 		postorder,
+		prettyPrint,
 	};
 };
 
