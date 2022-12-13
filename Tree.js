@@ -166,6 +166,11 @@ const Tree = (array) => {
 		return diff <= 1 && diff >= -1;
 	};
 
+	const rebalance = () => {
+		if (isBalanced()) return;
+		root = buildTree(inorder());
+	};
+
 	const prettyPrint = (node = root, prefix = '', isLeft = true) => {
 		if (node.right !== null) {
 			prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
@@ -185,6 +190,7 @@ const Tree = (array) => {
 		preorder,
 		inorder,
 		postorder,
+		rebalance,
 		prettyPrint,
 	};
 };
