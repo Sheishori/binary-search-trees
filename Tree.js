@@ -14,7 +14,23 @@ const Tree = (array) => {
 
 	let root = buildTree(removeDuplicates(array));
 
-	return { root };
+	const insert = (value) => {
+		root = insertLeaf(value, root);
+	};
+
+	const insertLeaf = (value, root) => {
+		// if root is null, insert a new value
+		if (root === null) {
+			root = Node(value);
+			return root;
+			// if value is smaller than the root, travel into the left side
+		} else if (value < root.value) root.left = insertLeaf(value, root.left);
+		// if bigger, travel into the right side
+		else root.right = insertLeaf(value, root.right);
+		return root;
+	};
+
+	return { root, insert };
 };
 
 export default Tree;
