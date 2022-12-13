@@ -101,7 +101,31 @@ const Tree = (array) => {
 		}
 	};
 
-	return { root, insert, deleteNode, find, levelOrder };
+	const inorder = (func) => {
+		let nodes = inorderRec(root);
+		if (func) {
+			nodes.forEach((node) => {
+				func(node);
+			});
+			// else return an array of values
+		} else {
+			let values = [];
+			nodes.forEach((node) => {
+				values.push(node.value);
+			});
+			return values;
+		}
+	};
+
+	const inorderRec = (root, nodes = []) => {
+		if (root === null) return;
+		nodes.push(root);
+		if (root.left !== null) inorderRec(root.left, nodes);
+		if (root.right !== null) inorderRec(root.right, nodes);
+		return nodes;
+	};
+
+	return { root, insert, deleteNode, find, levelOrder, inorder };
 };
 
 export default Tree;
