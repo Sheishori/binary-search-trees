@@ -106,6 +106,19 @@ const Tree = (array) => {
 		return processFunc(nodes, func);
 	};
 
+	const preorder = (func) => {
+		let nodes = preorderRec(root);
+		return processFunc(nodes, func);
+	};
+
+	const preorderRec = (root, nodes = []) => {
+		if (root === null) return;
+		nodes.push(root);
+		if (root.left !== null) preorderRec(root.left, nodes);
+		if (root.right !== null) preorderRec(root.right, nodes);
+		return nodes;
+	};
+
 	const inorder = (func) => {
 		let nodes = inorderRec(root);
 		return processFunc(nodes, func);
@@ -119,7 +132,29 @@ const Tree = (array) => {
 		return nodes;
 	};
 
-	return { root, insert, deleteNode, find, levelOrder, inorder };
+	const postorder = (func) => {
+		let nodes = postorderRec(root);
+		return processFunc(nodes, func);
+	};
+
+	const postorderRec = (root, nodes = []) => {
+		if (root === null) return;
+		if (root.left !== null) postorderRec(root.left, nodes);
+		if (root.right !== null) postorderRec(root.right, nodes);
+		nodes.push(root);
+		return nodes;
+	};
+
+	return {
+		root,
+		insert,
+		deleteNode,
+		find,
+		levelOrder,
+		preorder,
+		inorder,
+		postorder,
+	};
 };
 
 export default Tree;
