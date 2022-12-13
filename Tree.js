@@ -153,6 +153,14 @@ const Tree = (array) => {
 		return (leftHeight > rightHeight ? leftHeight : rightHeight) + 1;
 	};
 
+	const depth = (node, nodeRoot = root) => {
+		if (node === null) return -1;
+		if (node === nodeRoot) return 0;
+		// add 1 for every recursive call into a branch in search of the value
+		if (node.value < nodeRoot.value) return depth(node, nodeRoot.left) + 1;
+		else return depth(node, nodeRoot.right) + 1;
+	};
+
 	return {
 		root,
 		insert,
