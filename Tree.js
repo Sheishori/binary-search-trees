@@ -113,8 +113,8 @@ const Tree = (array) => {
 
 	const inorderRec = (root, nodes = []) => {
 		if (root === null) return;
-		nodes.push(root);
 		if (root.left !== null) inorderRec(root.left, nodes);
+		nodes.push(root);
 		if (root.right !== null) inorderRec(root.right, nodes);
 		return nodes;
 	};
