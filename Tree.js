@@ -190,6 +190,7 @@ const Tree = (array) => {
 		preorder,
 		inorder,
 		postorder,
+		isBalanced,
 		rebalance,
 		prettyPrint,
 	};
