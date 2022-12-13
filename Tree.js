@@ -145,6 +145,14 @@ const Tree = (array) => {
 		return nodes;
 	};
 
+	const height = (node) => {
+		if (node === null) return -1;
+		let leftHeight = height(node.left);
+		let rightHeight = height(node.right);
+		// pick the longer path
+		return (leftHeight > rightHeight ? leftHeight : rightHeight) + 1;
+	};
+
 	return {
 		root,
 		insert,
