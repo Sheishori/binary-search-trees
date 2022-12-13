@@ -15,20 +15,17 @@ const Tree = (array) => {
 	let root = buildTree(removeDuplicates(array));
 
 	const insert = (value) => {
-		root = insertLeaf(value, root);
+		root = insertRec(value, root);
 	};
 
-	const insertLeaf = (value, root) => {
-		// if root is null, insert a new value
-		if (root === null) {
-			root = Node(value);
-			return root;
-			// don't do anything if the value already exists in the tree
-		} else if (value === root.value) return root;
+	const insertRec = (value, root) => {
+		// if root is null, insert the new value as root
+		if (root === null) return Node(value);
 		// if value is smaller than the root, travel into the left side
-		else if (value < root.value) root.left = insertLeaf(value, root.left);
-		// if bigger, travel into the right side
-		else root.right = insertLeaf(value, root.right);
+		if (value < root.value) root.left = insertRec(value, root.left);
+		// if value is bigger than the root, travel into the right side
+		else if (value > root.value) root.right = insertRec(value, root.right);
+		// don't do anything if the value already exists in the tree
 		return root;
 	};
 
@@ -37,23 +34,22 @@ const Tree = (array) => {
 	};
 
 	const deleteNodeRec = (value, root) => {
+		// don't do anything if the tree is empty or value doesn't exist
 		if (root === null) return root;
-		//if node has no children, remove it
-		if (value === root.value && root.left === null && root.right === null)
-			return null;
 		// if deleting a value smaller than the root, travel into the left side
-		else if (value < root.value) root.left = deleteNodeRec(value, root.left);
-		// if smaller, travel into the right side
+		if (value < root.value) root.left = deleteNodeRec(value, root.left);
+		// if deleting a value bigger than the root, travel into the right side
 		else if (value > root.value) root.right = deleteNodeRec(value, root.right);
 		else {
+			//if node has no children, remove it
+			if (root.left === null && root.right === null) return null;
 			// if deleting a node with only a right child, replace it with it
 			if (root.left === null) return root.right;
 			// if deleting a node with only a left child, replace it with it
-			else if (root.right === null) return root.left;
+			if (root.right === null) return root.left;
 
 			// if deleting a node with two children, replace it's value with the smallest from the right subtree
 			root.value = smallestChild(root.right);
-
 			// delete the child whose value was used to replace the deleted node
 			root.right = deleteNodeRec(root.value, root.right);
 			return root;
