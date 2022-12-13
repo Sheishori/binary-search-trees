@@ -31,7 +31,43 @@ const Tree = (array) => {
 		else root.right = insertLeaf(value, root.right);
 		return root;
 	};
-	return { root, insert };
+
+	const deleteNode = (value) => {
+		root = deleteNodeRec(value, root);
+	};
+
+	const deleteNodeRec = (value, root) => {
+		if (root === null) return root;
+		//if node has no children, remove it
+		if (value === root.value && root.left === null && root.right === null)
+			return null;
+		// if deleting a value smaller than the root, travel into the left side
+		else if (value < root.value) root.left = deleteNodeRec(value, root.left);
+		// if smaller, travel into the right side
+		else if (value > root.value) root.right = deleteNodeRec(value, root.right);
+		else {
+			// if deleting a node with only a right child, replace it with it
+			if (root.left === null) return root.right;
+			// if deleting a node with only a left child, replace it with it
+			else if (root.right === null) return root.left;
+
+			// if deleting a node with two children, replace it's value with the smallest from the right subtree
+			root.value = smallestChild(root.right);
+
+			// delete the child whose value was used to replace the deleted node
+			root.right = deleteNodeRec(root.value, root.right);
+			return root;
+		}
+		return root;
+	};
+
+	const smallestChild = (root) => {
+		// search for the smallest child in the tree
+		if (root.left === null) return root.value;
+		else return smallestChild(root.left);
+	};
+
+	return { root, insert, deleteNode };
 };
 
 export default Tree;

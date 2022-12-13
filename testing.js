@@ -13,5 +13,5 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 };
 
 prettyPrint(newTree.root);
-newTree.insert(4);
+newTree.deleteNode(8);
 prettyPrint(newTree.root);
