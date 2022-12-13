@@ -1,5 +1,5 @@
-const Node = (root, left = null, right = null) => {
-	return { root, left, right };
+const Node = (value, left = null, right = null) => {
+	return { value, left, right };
 };
 
 export default Node;
