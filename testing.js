@@ -12,5 +12,5 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 	}
 };
 
-prettyPrint(newTree.root);
-console.log(newTree.find(9));
+//prettyPrint(newTree.root);
+console.log(newTree.levelOrder());
