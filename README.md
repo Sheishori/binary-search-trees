@@ -1,5 +1,6 @@
 # binary-search-trees
 A module creating a binary tree from a given array.
+
 Methods available:
 
 **root** - returns the root node
