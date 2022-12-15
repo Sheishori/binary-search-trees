@@ -161,9 +161,17 @@ const Tree = (array) => {
 		else return depth(node, nodeRoot.right) + 1;
 	};
 
-	const isBalanced = () => {
-		let diff = height(root.left) - height(root.right);
-		return diff <= 1 && diff >= -1;
+	const isBalanced = (node = root) => {
+		if (node === null) return true;
+		let leftHeight = height(node.left);
+		let rightHeight = height(node.right);
+		// return the absolute value of the subtraction
+		let diff = Math.abs(leftHeight - rightHeight);
+		// check if current branches are balanced as well as branches of branches
+		if (diff <= 1 && isBalanced(node.left) && isBalanced(node.right)) {
+			return true;
+		}
+		return false;
 	};
 
 	const rebalance = () => {
